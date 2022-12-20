@@ -1,0 +1,66 @@
+{
+    "mappings":{
+        "properties":{
+            "@timestamp":{
+                "type" : "date"
+            },
+            "topic":{
+                "type" : "text"
+            },
+            "p0":{
+                "type" : "integer"
+            },
+            "p1":{
+                "type" : "integer"
+            },
+            "p2":{
+                "type" : "integer"
+            },
+            "p3":{
+                "type" : "integer"
+            },
+            "p4":{
+                "type" : "integer"
+            },
+            "p5":{
+                "type" : "integer"
+            },
+            "p6":{
+                "type" : "integer"
+            },
+            "p7":{
+                "type" : "integer"
+            },
+            "p8":{
+                "type" : "integer"
+            },
+            "p9":{
+                "type" : "integer"
+            },
+            "p10":{
+                "type" : "integer"
+            },
+            "p11":{
+                "type" : "integer"
+            },
+            "p12":{
+                "type" : "integer"
+            },
+            "p13":{
+                "type" : "integer"
+            },
+            "p14":{
+                "type" : "integer"
+            },
+            "p15":{
+                "type" : "integer"
+            },
+            "p16":{
+                "type" : "integer"
+            },
+            "p17":{
+                "type" : "integer"
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+connector.class=io.lenses.streamreactor.connect.aws.s3.sink.S3SinkConnector
+key.converter.schemas.enable=false
+connect.s3.kcql=INSERT INTO skb-oasis-config-service:kafka SELECT * FROM test1 STOREAS `Text` WITH_FLUSH_COUNT=100 WITH_FLUSH_SIZE=134217728 WITH_FLUSH_INTERVAL = 60
+aws.region=ap-northeast-2
+aws.custom.endpoint=vpce-0e956da4c16c411da
+tasks.max=2
+topics=test1
+schema.enable=false
+value.converter=org.apache.kafka.connect.storage.StringConverter
+errors.log.enable=true
+key.converter=org.apache.kafka.connect.storage.StringConverter
+
+
+
+
+
+connect.s3.kcql=INSERT INTO skb-oasis-config-service:kafka/s3sink/navi2log/ 
+                SELECT * FROM navi2log 
+                ## STORE OPTION : `JSON`, `Avro`, `Parquet`, `Text`, `CSV_WithHeaders`, `CSV`
+                STOREAS `Text` 
+                WITH_FLUSH_COUNT = 100
+                ## byte
+                WITH_FLUSH_SIZE = 1048576 
+                ## seconds 
+                WITH_FLUSH_INTERVAL = 60

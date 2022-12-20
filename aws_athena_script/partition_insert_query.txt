@@ -1,0 +1,58 @@
+-->> DDL
+-- DROP DATABASE  IF EXISTS stage  CASCADE;  
+CREATE DATABASE  IF NOT EXISTS stage ;  
+DROP TABLE stage.TB_TEST1;
+CREATE EXTERNAL TABLE IF NOT EXISTS stage.TB_TEST1(
+ strd_dt string, 
+ col1 string, 
+ col2 string, 
+ col3 bigint, 
+ col4 string
+)
+PARTITIONED BY ( 
+ base_dt string
+ , base_tm string)
+STORED AS PARQUET
+LOCATION
+ 's3://sydev-lake/data/stage/TB_TEST1'
+;
+
+-->> Dumppy Row
+SELECT '20220301' AS STRD_DT
+	  , 'AA'     AS col1
+	  , '기타'     AS col2
+	  , 123      AS col3
+	  , 'ZZZZ'  AS col4
+;
+
+-->> 데이터 적재
+INSERT INTO stage.TB_TEST1 (strd_Dt, base_Dt, base_tm)
+SELECT '20220301' AS STRD_DT, '20220301' base_dt, '00' BASE_TM ;
+
+INSERT INTO stage.TB_TEST1 
+SELECT '20220301' AS STRD_DT, '가' AS col1, '기타' AS col2, 123 AS col3, 'test' AS col4, '20220301' base_dt, '00' BASE_TM union all
+SELECT '20220301' AS STRD_DT, '나' AS col1, '기타' AS col2, 123 AS col3, 'test' AS col4, '20220301' base_dt, '01' BASE_TM union all
+SELECT '20220301' AS STRD_DT, '다' AS col1, '기타' AS col2, 123 AS col3, 'test' AS col4, '20220301' base_dt, '02' BASE_TM
+;
+INSERT INTO stage.TB_TEST1 
+SELECT '20220302' AS STRD_DT, col1, col2, col3, col4, '20220302' base_dt, '00' BASE_TM
+FROM stage.TB_TEST1
+WHERE base_dt='20220301'
+;
+
+-->> Partition 관련
+ALTER TABLE stage.TB_TEST1 ADD IF NOT EXISTS PARTITION(base_dt = '20220101', BASE_TM = '00') ;
+alter table stage.TB_TEST1 ADD IF NOT EXISTS PARTITION(base_dt = '20220101', base_tm = '01') location 's3://sydev-lake/data/stage/TB_TEST1/base_dt=20220101/base_tm=01/';
+
+-->> 데이터 조회
+select * from stage.TB_TEST1 order by base_dt, base_tm;
+
+
+-->> 메타정보 조회
+DESCRIBE stage.TB_TEST1;
+describe formatted stage.TB_TEST1;   -- 상세정보
+show partitions stage.TB_TEST1;
+
+
+-->> 메타정보 업데이트
+MSCK REPAIR TABLE stage.TB_TABLE1 ;

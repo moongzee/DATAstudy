@@ -1,0 +1,8 @@
+$s3_path = "s3://aws-cloudtrail-logs-408092397132/AWSLogs/408092397132/CloudTrail/ap-northeast-2/2022/03/"
+
+$s3_list = aws s3 ls $s3_path
+
+foreach($s3dir in $s3list.split("PRE ")|where{$_ -and $_.Trim()}){
+echo $s3dir
+aws s3 ls $s3_path$s3dir --recursive --human-readable --summarize | grep "Total Size"
+aws s3 ls $s3_path$s3dir --recursive --human-readable --summarize | grep "Total Objects"}
