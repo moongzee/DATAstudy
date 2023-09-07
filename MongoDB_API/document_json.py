@@ -11,9 +11,9 @@ import platform
 import json
 
 if platform.system() == 'Windows':
-    path = '//192.168.0.113/Imagoworks'
+    path = '//host_ip/ports'
 else:
-    path = '//Volumes/Imagoworks'
+    path = '//Volumes/ports'
 
 
 def label_np(data):
