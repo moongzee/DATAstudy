@@ -12,11 +12,11 @@ from pymongo import MongoClient
 from pymongo.cursor import CursorType
 
 if platform.system() == 'Windows':
-    path = '//192.168.0.113/Imagoworks'
+    path = '//host_ip/port'
 else:
-    path = '//Volumes/Imagoworks'
+    path = '//Volumes/port'
 
-my_client = MongoClient("mongodb://localhost:27017/")
+my_client = MongoClient("mongodb://localhost:port/")
 db = my_client['AI_origin_data']
 collection = db['DDH_DAEYOU']
 
