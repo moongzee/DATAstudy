@@ -6,10 +6,10 @@ from bson.json_util import dumps
 import pandas as pd 
 import json
 
-client = MongoClient('192.168.0.131',27018)
+client = MongoClient('host_ip',port)
 
-toy_db = client['toy_db']
-collection = toy_db['mesh_3d_data']
+toy_db = client['schema']
+collection = toy_db['collection']
 
 app =Flask(__name__, static_url_path='', static_folder='')
 CORS(app)
