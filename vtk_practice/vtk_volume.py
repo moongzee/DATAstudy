@@ -30,7 +30,7 @@ colorTransferFunction.AddRGBPoint(5.0, 1.0, 1.0, 1.0)
 
 
 
-file = '//192.168.0.113/Imagoworks/Data/confident/CT/CBCT-CAU/train/0254-0.vti'
+file = '/train/0254-0.vti'
 
 
 #vti file reader
