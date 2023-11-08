@@ -22,7 +22,7 @@ def label_np(data):
     return label_np
 
 
-filelist = glob.glob(r'\\192.168.0.113\Imagoworks\Data\confident\Mesh\IntraoralScan\SNU_full\F5\*.stl')
+filelist = glob.glob(r'/train/F5/*.stl')
 
 actors=[]
 for file in filelist:
